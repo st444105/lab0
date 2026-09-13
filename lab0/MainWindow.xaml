@@ -12,23 +12,65 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal"
+        <StackPanel Grid.Row="0"
                     Margin="10">
 
-            <Button Content="Произвольный треугольник"
-                    Click="TriangleButton_Click"
-                    Margin="5"
-                    Padding="10,5"/>
+            <StackPanel Orientation="Horizontal">
 
-            <Button Content="Произвольный прямоугольник"
-                    Click="RectangleButton_Click"
-                    Margin="5"
-                    Padding="10,5"/>
+                <Button Content="Произвольный треугольник"
+                        Click="TriangleButton_Click"
+                        Margin="5"
+                        Padding="10,5"/>
 
-            <Button Content="Квадрат"
-                    Click="SquareButton_Click"
-                    Margin="5"
-                    Padding="10,5"/>
+                <Button Content="Произвольный прямоугольник"
+                        Click="RectangleButton_Click"
+                        Margin="5"
+                        Padding="10,5"/>
+
+                <Button Content="Квадрат"
+                        Click="SquareButton_Click"
+                        Margin="5"
+                        Padding="10,5"/>
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="5">
+
+                <TextBlock Text="X:"
+                           VerticalAlignment="Center"/>
+
+                <TextBox x:Name="XInput"
+                         Width="60"
+                         Text="100"
+                         Margin="5"/>
+
+                <TextBlock Text="Y:"
+                           VerticalAlignment="Center"/>
+
+                <TextBox x:Name="YInput"
+                         Width="60"
+                         Text="100"
+                         Margin="5"/>
+
+                <TextBlock Text="Размер:"
+                           VerticalAlignment="Center"/>
+
+                <TextBox x:Name="SizeInput"
+                         Width="60"
+                         Text="150"
+                         Margin="5"/>
+
+                <Button Content="Треугольник"
+                        Click="CustomTriangleButton_Click"
+                        Margin="5"/>
+
+                <Button Content="Квадрат"
+                        Click="CustomSquareButton_Click"
+                        Margin="5"/>
+
+            </StackPanel>
+
         </StackPanel>
 
         <Canvas x:Name="Scene"

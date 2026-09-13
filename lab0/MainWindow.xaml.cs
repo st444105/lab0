@@ -110,5 +110,48 @@ namespace lab0
 
             DrawRectangle(square);
         }
+
+        private void CustomSquareButton_Click(object sender, RoutedEventArgs e)
+        {
+            ClearScene();
+
+            if (!int.TryParse(XInput.Text, out int x))
+                return;
+
+            if (!int.TryParse(YInput.Text, out int y))
+                return;
+
+            if (!int.TryParse(SizeInput.Text, out int size))
+                return;
+
+            Point2D startPoint = new Point2D(x, y);
+
+            RectangleShape square =
+                new RectangleShape(startPoint, size, size);
+
+            DrawRectangle(square);
+        }
+
+        private void CustomTriangleButton_Click(object sender, RoutedEventArgs e)
+        {
+            ClearScene();
+
+            if (!int.TryParse(XInput.Text, out int x))
+                return;
+
+            if (!int.TryParse(YInput.Text, out int y))
+                return;
+
+            if (!int.TryParse(SizeInput.Text, out int size))
+                return;
+
+            Point2D p1 = new Point2D(x, y);
+            Point2D p2 = new Point2D(x + size, y);
+            Point2D p3 = new Point2D(x + size / 2, y - size);
+
+            Triangle triangle = new Triangle(p1, p2, p3);
+
+            DrawTriangle(triangle);
+        }
     }
 }
