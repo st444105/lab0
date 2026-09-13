@@ -14,6 +14,13 @@ namespace lab0
 {
     public partial class MainWindow : Window
     {
+        private Triangle? currentTriangle;
+        private RectangleShape? currentRectangle;
+        private bool isResettingSliders = false;
+
+        private int previousX = 0;
+        private int previousY = 0;
+
         private readonly Random rnd = new Random();
 
         public MainWindow()
@@ -63,7 +70,13 @@ namespace lab0
                 rnd.Next(20, (int)Scene.ActualWidth - 20),
                 rnd.Next(20, (int)Scene.ActualHeight - 20));
 
-            Triangle triangle = new Triangle(p1, p2, p3);
+            Triangle triangle =
+                new Triangle(p1, p2, p3);
+
+            currentTriangle = triangle;
+            currentRectangle = null;
+
+            ResetMovement();
 
             DrawTriangle(triangle);
         }
@@ -80,8 +93,12 @@ namespace lab0
 
             Point2D startPoint = new Point2D(x, y);
 
-            RectangleShape rectangle =
-                new RectangleShape(startPoint, width, height);
+            RectangleShape rectangle = new RectangleShape(startPoint, width, height);
+
+            currentRectangle = rectangle;
+            currentTriangle = null;
+
+            ResetMovement();
 
             DrawRectangle(rectangle);
         }
@@ -108,6 +125,11 @@ namespace lab0
             RectangleShape square =
                 new RectangleShape(startPoint, size, size);
 
+            currentRectangle = square;
+            currentTriangle = null;
+
+            ResetMovement();
+
             DrawRectangle(square);
         }
 
@@ -129,6 +151,11 @@ namespace lab0
             RectangleShape square =
                 new RectangleShape(startPoint, size, size);
 
+            currentRectangle = square;
+            currentTriangle = null;
+
+            ResetMovement();
+
             DrawRectangle(square);
         }
 
@@ -149,9 +176,75 @@ namespace lab0
             Point2D p2 = new Point2D(x + size, y);
             Point2D p3 = new Point2D(x + size / 2, y - size);
 
-            Triangle triangle = new Triangle(p1, p2, p3);
+            Triangle triangle =
+                new Triangle(p1, p2, p3);
+
+            currentTriangle = triangle;
+            currentRectangle = null;
+
+            ResetMovement();
 
             DrawTriangle(triangle);
+        }
+
+        private void MoveSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (isResettingSliders)
+                return;
+
+            if (MoveXSlider == null || MoveYSlider == null)
+                return;
+
+            int newX = (int)MoveXSlider.Value;
+            int newY = (int)MoveYSlider.Value;
+
+            int dx = newX - previousX;
+            int dy = newY - previousY;
+
+            if (currentTriangle != null)
+            {
+                currentTriangle.AddX(dx);
+                currentTriangle.AddY(dy);
+            }
+
+            if (currentRectangle != null)
+            {
+                currentRectangle.AddX(dx);
+                currentRectangle.AddY(dy);
+            }
+
+            previousX = newX;
+            previousY = newY;
+
+            RedrawCurrentShape();
+        }
+
+        private void RedrawCurrentShape()
+        {
+            ClearScene();
+
+            if (currentTriangle != null)
+            {
+                DrawTriangle(currentTriangle);
+            }
+
+            if (currentRectangle != null)
+            {
+                DrawRectangle(currentRectangle);
+            }
+        }
+
+        private void ResetMovement()
+        {
+            isResettingSliders = true;
+
+            previousX = 0;
+            previousY = 0;
+
+            MoveXSlider.Value = 0;
+            MoveYSlider.Value = 0;
+
+            isResettingSliders = false;
         }
     }
 }
