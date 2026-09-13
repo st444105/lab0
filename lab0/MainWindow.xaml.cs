@@ -96,7 +96,19 @@ namespace lab0
 
         private void SquareButton_Click(object sender, RoutedEventArgs e)
         {
+            ClearScene();
 
+            int size = rnd.Next(100, 250);
+
+            int x = rnd.Next(20, Math.Max(21, (int)Scene.ActualWidth - size));
+            int y = rnd.Next(20, Math.Max(21, (int)Scene.ActualHeight - size));
+
+            Point2D startPoint = new Point2D(x, y);
+
+            RectangleShape square =
+                new RectangleShape(startPoint, size, size);
+
+            DrawRectangle(square);
         }
     }
 }
