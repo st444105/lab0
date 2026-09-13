@@ -47,5 +47,35 @@ namespace lab0
         {
             Scene.Children.Clear();
         }
+        private void TriangleButton_Click(object sender, RoutedEventArgs e)
+        {
+            ClearScene();
+
+            Point2D p1 = new Point2D(
+                rnd.Next(20, (int)Scene.ActualWidth - 20),
+                rnd.Next(20, (int)Scene.ActualHeight - 20));
+
+            Point2D p2 = new Point2D(
+                rnd.Next(20, (int)Scene.ActualWidth - 20),
+                rnd.Next(20, (int)Scene.ActualHeight - 20));
+
+            Point2D p3 = new Point2D(
+                rnd.Next(20, (int)Scene.ActualWidth - 20),
+                rnd.Next(20, (int)Scene.ActualHeight - 20));
+
+            Triangle triangle = new Triangle(p1, p2, p3);
+
+            DrawTriangle(triangle);
+        }
+
+        private void RectangleButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SquareButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
