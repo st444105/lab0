@@ -70,7 +70,28 @@ namespace lab0
 
         private void RectangleButton_Click(object sender, RoutedEventArgs e)
         {
+            ClearScene();
 
+            int width = rnd.Next(100, 300);
+            int height = rnd.Next(100, 250);
+
+            int x = rnd.Next(20, Math.Max(21, (int)Scene.ActualWidth - width));
+            int y = rnd.Next(20, Math.Max(21, (int)Scene.ActualHeight - height));
+
+            Point2D startPoint = new Point2D(x, y);
+
+            RectangleShape rectangle =
+                new RectangleShape(startPoint, width, height);
+
+            DrawRectangle(rectangle);
+        }
+
+        public void DrawRectangle(RectangleShape rectangle)
+        {
+            DrawLine(rectangle.P1, rectangle.P2);
+            DrawLine(rectangle.P2, rectangle.P3);
+            DrawLine(rectangle.P3, rectangle.P4);
+            DrawLine(rectangle.P4, rectangle.P1);
         }
 
         private void SquareButton_Click(object sender, RoutedEventArgs e)
